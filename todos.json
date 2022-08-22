@@ -1,0 +1,15 @@
+{
+  "todos": [
+    {
+      "id": 132456,
+      "todo": "Fazer café",
+      "isChecked": true
+    },
+    {
+      "todo": "Arrumar a casa",
+      "isChecked": true,
+      "date": "2022-08-23T00:00:00.000Z",
+      "id": 132457
+    }
+  ]
+}
