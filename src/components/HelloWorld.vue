@@ -14,7 +14,8 @@ export default {
       const todo = {
         todo: this.todo,
         isChecked: false,
-        date: new Date(this.todoDate).toISOString(),
+        finishDate: new Date(this.todoDate).toISOString(),
+        createdat: new Date().toISOString(),
       };
       this.$store.dispatch("addTodo", todo);
       this.todo = "";
@@ -45,7 +46,7 @@ export default {
     <v-container>
       <v-row class="justify-center mt-10">
         <v-col sm="5">
-          <div class="text-h5 mb-3 font-weight-bold">Add a new todo</div>
+          <div class="text-h5 mb-3 font-weight-bold px-3">Add a new todo</div>
           <VForm
             @submit.prevent="getInputValue"
             class="d-flex align-center justify-center row"
@@ -62,26 +63,22 @@ export default {
             <v-col sm="3">
               <v-text-field
                 label="set the date"
-                type="date"
+                type="datetime-local"
                 hide-details="false"
-                disablePast="true"
+                variant="outlined"
                 v-model="todoDate"
               ></v-text-field>
             </v-col>
             <v-col sm="1"
               ><v-btn
                 style="height: 55px"
-                color="success"
+                color="primary"
                 @click="getInputValue"
               >
                 <v-icon icon="mdi mdi-plus-thick"></v-icon> </v-btn
             ></v-col>
           </VForm>
-          <v-col
-            sm="12"
-            class="mt-10 px-0 d-flex justify-center"
-            v-if="totalTodos > 0"
-          >
+          <v-col sm="12" class="mt-10 px-0 d-flex" v-if="totalTodos > 0">
             <v-chip class="ma-2" color="primary">
               <template v-if="totalTodos > 1">
                 {{ totalTodos }} Todos
@@ -93,16 +90,29 @@ export default {
             sm="12"
             v-for="(newTodo, index) in todoList"
             :class="[
-              'd-flex justify-beetween align-items-center px-0',
+              'd-flex justify-beetween align-center px-0',
               newTodo.isChecked && 'text-disabled',
             ]"
           >
             <v-checkbox
               :label="newTodo.todo"
               v-model="newTodo.isChecked"
+              color="primary"
               @change="completeTodo(newTodo)"
               hide-details="false"
             ></v-checkbox>
+
+            <div
+              :class="[
+                'text-caption mx-3',
+                new Date(newTodo.finishDate).getTime() < new Date().getTime() &&
+                !newTodo.isChecked
+                  ? 'text-error'
+                  : 'text-success',
+              ]"
+            >
+              {{ newTodo?.formattedFinishdate }}
+            </div>
 
             <v-btn
               icon

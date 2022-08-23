@@ -36,7 +36,18 @@ const actions = {
     await api
       .get("todos")
       .then((res) => {
-        commit("setTodoList", res.data);
+        const todos = res.data
+          .map((todo) => {
+            return {
+              ...todo,
+              formattedFinishdate: new Intl.DateTimeFormat("pt-br", {
+                dateStyle: "medium",
+              }).format(new Date(todo.finishDate)),
+            };
+          })
+          .sort((a, b) => new Date(a.finishDate) - new Date(b.finishDate))
+          .sort((a, b) => Number(a.isChecked) - Number(b.isChecked));
+        commit("setTodoList", todos);
       })
       .catch((err) => {
         commit("todoFailure", err);
@@ -46,8 +57,14 @@ const actions = {
     state.updatingTodo = true;
     await api
       .post("todos", payload)
-      .then((res) => {
-        commit("addTodo", res.data);
+      .then(({ data }) => {
+        const todo = {
+          ...data,
+          formattedFinishdate: new Intl.DateTimeFormat("pt-br", {
+            dateStyle: "medium",
+          }).format(new Date(data.finishDate)),
+        };
+        commit("addTodo", todo);
       })
       .catch((err) => {
         commit("todoFailure", err);
@@ -68,8 +85,14 @@ const actions = {
     state.updatingTodo = true;
     await api
       .put(`todos/${payload.id}`, payload)
-      .then((res) => {
-        commit("updateTodo", res.data);
+      .then(({ data }) => {
+        const todo = {
+          ...data,
+          formattedFinishdate: new Intl.DateTimeFormat("pt-br", {
+            dateStyle: "medium",
+          }).format(new Date(data.finishDate)),
+        };
+        commit("updateTodo", todo);
       })
       .catch((err) => {
         commit("todoFailure", err);

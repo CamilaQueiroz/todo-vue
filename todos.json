@@ -1,15 +1,35 @@
 {
   "todos": [
     {
-      "id": 132456,
       "todo": "Fazer café",
-      "isChecked": true
+      "isChecked": true,
+      "finishDate": "2022-08-23T10:10:00.000Z",
+      "createdat": "2022-08-23T02:04:59.140Z",
+      "id": 1,
+      "formattedFinishdate": "23 de ago. de 2022"
     },
     {
-      "todo": "Arrumar a casa",
+      "todo": "Dar banho no Pedro",
       "isChecked": true,
-      "date": "2022-08-23T00:00:00.000Z",
-      "id": 132457
+      "finishDate": "2022-08-22T02:11:00.000Z",
+      "createdat": "2022-08-23T02:11:12.961Z",
+      "id": 2,
+      "formattedFinishdate": "21 de ago. de 2022"
+    },
+    {
+      "todo": "Buscar a cleide",
+      "isChecked": false,
+      "finishDate": "2022-08-27T16:20:00.000Z",
+      "createdat": "2022-08-23T02:19:37.759Z",
+      "id": 3,
+      "formattedFinishdate": "27 de ago. de 2022"
+    },
+    {
+      "todo": "Buscar a Maria",
+      "isChecked": false,
+      "finishDate": "2022-08-27T02:24:00.000Z",
+      "createdat": "2022-08-23T02:24:46.456Z",
+      "id": 4
     }
   ]
 }
