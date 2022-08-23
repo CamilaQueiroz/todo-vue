@@ -2,7 +2,7 @@
 import { mapGetters, mapState, mapMutations } from "vuex";
 
 export default {
-  name: "HelloWorld",
+  name: "Todo",
 
   data: () => ({
     todo: "",
@@ -45,13 +45,13 @@ export default {
   <v-form>
     <v-container>
       <v-row class="justify-center mt-10">
-        <v-col sm="5">
-          <div class="text-h5 mb-3 font-weight-bold px-3">Add a new todo</div>
+        <v-col sm="5" class="bg-grey-lighten-4">
+          <div class="text-h4 px-3 mt-5 font-weight-bold">Add a new todo</div>
           <VForm
             @submit.prevent="getInputValue"
             class="d-flex align-center justify-center row"
           >
-            <v-col sm="8"
+            <v-col sm="7"
               ><v-text-field
                 label="What do you need to do?"
                 variant="outlined"
@@ -69,10 +69,11 @@ export default {
                 v-model="todoDate"
               ></v-text-field>
             </v-col>
-            <v-col sm="1"
+            <v-col sm="2"
               ><v-btn
                 style="height: 55px"
                 color="primary"
+                class="w-100"
                 @click="getInputValue"
               >
                 <v-icon icon="mdi mdi-plus-thick"></v-icon> </v-btn
@@ -119,6 +120,7 @@ export default {
               dark
               size="x-small"
               color="error"
+              class="mr-3"
               @click="removeTodo(newTodo.id)"
             >
               <v-icon dark> mdi-delete </v-icon>
